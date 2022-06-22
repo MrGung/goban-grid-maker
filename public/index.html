@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="generator" content="HTML Tidy for Windows (vers 1st August 2004), see www.w3.org"/>
+
+    <title>Making Gobans - creating lines and hoshi</title>
+    <meta name="author" content="steffen glueckselig"/>
+    <link rel="stylesheet" type="text/css" href="gobanGen.css"/>
+    </script>
+</head>
+
+<body>
+<h1>Making Gobans - creating lines and hoshi</h1>
+
+<h2>What?</h2>
+
+<p><img src="goban_t.png" style="width:150px;float:right;margin-left:1em" alt="goban with coordinates"
+        title="sample output, zoomed out"/></p>
+
+<p>This page will allow you to create templates of gobans. You can set up some options from which this page will create
+    the grid.</p>
+
+<p>That grid can be used as a cheap goban when printed on paper. But it could also be used as a template for creating
+    high quality prints on wood (e.g. by <em>screen printing</em> it).</p>
+
+<h2>How?</h2>
+
+<p>This page generates a graphical representatin of the settings you provided. The format of that graphic is <a
+        href="http://www.heise.de/ix/artikel/2002/12/052/"><abbr title="scalable vector graphics">SVG</abbr></a>, a
+    vector format. That means it can be scaled without loss of quality.</p>
+
+<p>Be aware, though, that the resulting graphic should not be transformed in any way since it is generated to fit the
+    standard dimensions for gobans. Namely:</p>
+
+<ul>
+    <li>Horizontally the lines are 21.944mm apart.</li>
+
+    <li>The vertical spacing (disregarding the line-thickness) is 23.166mm.</li>
+
+    <li>If you choose to show coordinates, the <q>I</q> is omitted.</li>
+</ul>
+
+<h3>Tech-talk</h3>
+
+<p>You'll need a plugin to view the resulting graphic in your browser. I recommend the <a
+        href="http://www.adobe.com/svg/viewer/install/main.html">plugin from Adobe</a>. If you don't use
+    InternetExplorer have a look at <a
+            href="http://sdx.archivesdefrance.culture.gouv.fr/gpl/navimages/en/svgViewer.html">SVG Viewer Plugin
+        Installation</a> for short and detailed information.</p>
+
+<p>If you don't want to bother to install the plugin you don't have to. You should be able to download the file directly
+    to your computer (right click 'save as') and process it with other software (e.g. CoreDraw can handle SVGs). I
+    recommend <a href="http://inkscape.org/">Inkscape</a> for creating, editing and viewing SVGs.</p>
+
+<h2>Get in touch</h2>
+
+<p>If you encounter problems with this page, or if you have questions or suggestions, please contact me via email: <span
+        id="contact"><a href="#">Please activate JavaScript to write me an email.</a></span></p>
+
+<h2>Do it!</h2>
+
+<p>Please, make your choice.</p>
+
+<div id="app">Enable JavaScript to see your choices.</div>
+
+<form method="get" action="serverside_svg.php" id="inputForm" name="inputForm">
+    <fieldset>
+        <legend>Standard options</legend>
+
+        <p><label for="s">Size of board</label><select name="s" id="s">
+            <option>
+                9
+            </option>
+            <option>
+                13
+            </option>
+            <option>
+                19
+            </option>
+        </select></p>
+
+        <p><label for="sC">Show coordinates</label> <select name="sC" id="sC">
+            <option value="true">
+                yes
+            </option>
+            <option selected="selected" value="false">
+                no
+            </option>
+        </select></p>
+
+        <p><label for="sH" id="sHl">Show hoshi</label> <select name="sH" id="sH">
+            <option value="no">
+                no
+            </option>
+            <option selected="selected" value="corners">
+                in corners
+            </option>
+            <option value="tengen">
+                in corners and tengen
+            </option>
+            <option value="all">
+                all
+            </option>
+        </select></p>
+
+        <div style="clear:both"></div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Advanced options</legend>
+
+        <p><label for="lT">Thickness of lines in mm</label> <select name="lT" id="lT">
+            <option>
+                1
+            </option>
+            <option>
+                2
+            </option>
+            <option>
+                3
+            </option>
+        </select></p>
+
+        <p><label for="hD">Diameter of hoshi in mm</label> <select name="hD" id="hD">
+            <option>
+                2
+            </option>
+            <option selected="selected">
+                3
+            </option>
+            <option>
+                4
+            </option>
+        </select></p>
+
+        <div style="clear:both"></div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Expert options</legend>
+
+        <p><label for="dH">Horizontal distance of lines in mm</label> <input name="dH" type="text" size="5"
+                                                                             maxlength="6" value="21.944"/></p>
+
+        <p><label for="dV">Vertical distance of lines in mm</label> <input name="dV" type="text" size="5" maxlength="6"
+                                                                           value="23.166"/></p>
+
+        <div style="clear:both"></div>
+    </fieldset>
+
+    <p><input type="submit" value="Submit" id="submit"/></p>
+</form><!--<h2>Example output</h2>-->
+<!--<img src="goban.png" style="width:300px;display:block;margin:auto" alt"a 9x9 goban with coordinates shown" />-->
+
+<h2>Version history</h2>
+<h3><em>0.3</em> - 28.01.2007</h3>
+<ul>
+    <li>Added several different ways to place hoshi.
+    <li>
+    <li>Improved code - got rid of redundancies.</li>
+</ul>
+
+<h3><em>0.2</em> - 24.12.2004</h3>
+
+<p>I've now publically linked the script from my static templates-page.
+    <br/>
+    I've improved the code so that it does not generate SVG-tags which are not needed (namely the ones for
+    <em>hoshi</em>).</p>
+
+<h3><em>0.1</em> - 14.12.2004</h3>
+
+<p><em>Andr&#233; Sieber</em> reported a bug in my <a href="../konstruktion/templates.html">static templates</a> which
+    motivated me to hack this small script.</p>
+
+<script src="/js/main.js" type="application/javascript"></script>
+
+</body>
+</html>

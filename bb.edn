@@ -1,0 +1,10 @@
+{:paths ["src"]
+ :tasks {cljs (shell "npx shadow-cljs compile app")
+         serve {:requires [goban-grid-maker.server]
+                :task (goban-grid-maker.server/-main)}
+         deploy (do
+                  (run 'cljs)
+                  (shell "flyctl deploy"))
+         dev:cljs {:task (do
+                           (println "Starting shadow-cljs in watch-mode")
+                           (shell "npx shadow-cljs watch app"))}}}

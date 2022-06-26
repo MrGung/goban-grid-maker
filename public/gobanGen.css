@@ -1,21 +1,32 @@
-body{font-family:"Trebuchet MS", Verdana, verdana, Arial, arial, sans-serif;font-size:16px;font-weight:bold;background-color:white;max-width:500px;width:50%;margin:5em auto;text-align:justify}
+body{
+    font-family:"Trebuchet MS", Verdana, verdana, Arial, arial, sans-serif;
+    font-size:16px;
+    font-weight:bold;
+    background-color:white;
+    //max-width:500px;
+    //width:50%;
+    //margin:5em auto;
+    text-align:justify;
+    //padding:3rem;
+}
 
-fieldset {width:25em;margin:0 auto 1em}
-legend{color:#888;font-weight:lighter}
-fieldset label{float:left;width:20em}
-fieldset select, fieldset input{float:right;width:4em}
-fieldset label#sHl{float:left;width:12em}
-fieldset select#sH{float:right;width:12em}
-fieldset label, fieldset select, fieldset input{margin:3px}
-form input#submit{width:6em;margin:auto;display:block;padding:0}
 
-form p{margin:0;padding:0}
-form{background:#f6f6f6;padding:1em;border:1px solid #efefef}
 
-h1, h2, h3{position:relative;left:-1em}
+//h1, h2, h3{
+//    position:relative;
+//    left:-1em}
 
-a{font-family:Arial, sans-serif;font-size:0.95em;text-decoration:none;color:#C00;background-color:transparent;padding:0 3px}
+a{
+    font-family:Arial, sans-serif;
+    font-size:0.95em;
+    text-decoration:none;
+    color:#C00;
+    background-color:transparent;
+    padding:0 3px}
 a:link{}
 a:visited{color:#F66}
 a:active{}
-a:hover{background-color:#369;color:#fff;}
+a:hover{
+    background-color:#369;
+    color:#fff
+}

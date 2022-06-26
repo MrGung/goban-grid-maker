@@ -1,9 +1,58 @@
 (ns goban-grid-maker.core
-  (:require [reagent.dom :as dom]))
+  (:require
+    [re-com.core :as com :refer [h-box input-text slider box v-box]]
+    [reagent.core :as r]
+    [reagent.dom :as dom]))
 
 
 (defn app []
-  [:p "Hello, World"])
+  (let [model (r/atom "9")]
+    (fn []
+      [h-box :gap "10px"
+       :children [[h-box :style {:border "1px solid red"}
+                   :children [[box :child "Size of board"]
+                                    [slider {:model model
+                                             :min 2
+                                             :max 23
+                                             :width "20rem"
+                                             :on-change #(reset! model (str %))}]
+                                    [input-text {:model model
+                                                 #_#_:width "60px"
+                                                 :on-change #(reset! model (str %))
+                                                 #_#_:change-on-blur? false}]]]]]))
+  #_[:form#inputForm
+     [:fieldset
+      [:legend "Standard options"]
+      [:p [:label {:for "s"} "Size of board"] [:select#s {:name "s"}
+                                               [:option "9"]
+                                               [:option "13"]
+                                               [:option "19"]]]
+      [:p [:label {:for "sC"} "Show coordinates"] [:select#sC {:name "sC"}
+                                                   [:option {:value "true"} "yes"]
+                                                   [:option {:selected "selected" :value "false"} "no"]]]
+      [:p [:label#sHl {:for "sH"} "Show hoshi"] [:select#sH {:name "sH"}
+                                                 [:option {:value "no"} "no"]
+                                                 [:option {:selected "selected" :value "corners"} "in corners"]
+                                                 [:option {:value "tengen"} "in corners and tengen"]
+                                                 [:option {:value "all"} "all"]]]
+      [:div {:style "clear:both"}]]
+     [:fieldset
+      [:legend "Advanced options"]
+      [:p [:label {:for "lT"} "Thickness of lines in mm"] [:select#lT {:name "lT"}
+                                                           [:option "1"]
+                                                           [:option "2"]
+                                                           [:option "3"]]]
+      [:p [:label {:for "hD"} "Diameter of hoshi in mm"] [:select#hD {:name "hD"}
+                                                          [:option "2"]
+                                                          [:option {:selected "selected"} "3"]
+                                                          [:option "4"]]]
+      [:div {:style "clear:both"}]]
+     [:fieldset
+      [:legend "Expert options"]
+      [:p [:label {:for "dH"} "Horizontal distance of lines in mm"] [:input {:name "dH" :type "text" :size "5" :maxlength "6" :value "21.944"}]]
+      [:p [:label {:for "dV"} "Vertical distance of lines in mm"] [:input {:name "dV" :type "text" :size "5" :maxlength "6" :value "23.166"}]]
+      [:div {:style "clear:both"}]]
+     [:p [:input#submit {:type "submit" :value "Submit"}]]])
 
 (println "here!")
 

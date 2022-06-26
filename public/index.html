@@ -8,6 +8,11 @@
     <title>Making Gobans - creating lines and hoshi</title>
     <meta name="author" content="steffen glueckselig"/>
     <link rel="stylesheet" type="text/css" href="gobanGen.css"/>
+    <link rel="stylesheet" href="assets/css//bootstrap.css">
+    <link rel="stylesheet" href="assets/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="assets/css/re-com.css">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
     </script>
 </head>
 
@@ -65,93 +70,7 @@
 
 <div id="app">Enable JavaScript to see your choices.</div>
 
-<form method="get" action="serverside_svg.php" id="inputForm" name="inputForm">
-    <fieldset>
-        <legend>Standard options</legend>
-
-        <p><label for="s">Size of board</label><select name="s" id="s">
-            <option>
-                9
-            </option>
-            <option>
-                13
-            </option>
-            <option>
-                19
-            </option>
-        </select></p>
-
-        <p><label for="sC">Show coordinates</label> <select name="sC" id="sC">
-            <option value="true">
-                yes
-            </option>
-            <option selected="selected" value="false">
-                no
-            </option>
-        </select></p>
-
-        <p><label for="sH" id="sHl">Show hoshi</label> <select name="sH" id="sH">
-            <option value="no">
-                no
-            </option>
-            <option selected="selected" value="corners">
-                in corners
-            </option>
-            <option value="tengen">
-                in corners and tengen
-            </option>
-            <option value="all">
-                all
-            </option>
-        </select></p>
-
-        <div style="clear:both"></div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Advanced options</legend>
-
-        <p><label for="lT">Thickness of lines in mm</label> <select name="lT" id="lT">
-            <option>
-                1
-            </option>
-            <option>
-                2
-            </option>
-            <option>
-                3
-            </option>
-        </select></p>
-
-        <p><label for="hD">Diameter of hoshi in mm</label> <select name="hD" id="hD">
-            <option>
-                2
-            </option>
-            <option selected="selected">
-                3
-            </option>
-            <option>
-                4
-            </option>
-        </select></p>
-
-        <div style="clear:both"></div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Expert options</legend>
-
-        <p><label for="dH">Horizontal distance of lines in mm</label> <input name="dH" type="text" size="5"
-                                                                             maxlength="6" value="21.944"/></p>
-
-        <p><label for="dV">Vertical distance of lines in mm</label> <input name="dV" type="text" size="5" maxlength="6"
-                                                                           value="23.166"/></p>
-
-        <div style="clear:both"></div>
-    </fieldset>
-
-    <p><input type="submit" value="Submit" id="submit"/></p>
-</form><!--<h2>Example output</h2>-->
+<!--<h2>Example output</h2>-->
 <!--<img src="goban.png" style="width:300px;display:block;margin:auto" alt"a 9x9 goban with coordinates shown" />-->
 
 <h2>Version history</h2>

@@ -1,7 +1,12 @@
 {:paths ["src"]
+ :deps {org.babashka/http-server {:mvn/version "0.1.9"}
+        org.babashka/cli {:mvn/version "0.2.23"}}
+ :init (def cli-opts (cli/parse-opts *command-line-args* {:coerce {:port :int}}))
  :tasks {cljs (shell "npx shadow-cljs compile app")
-         serve {:requires [goban-grid-maker.server]
-                :task (goban-grid-maker.server/-main)}
+         serve {:requires ([babashka.http-server :as http-server])
+                :task (server/exec (merge {:port 8000
+                                           :dir "./public"}
+                                     cli-opts))}
          deploy (do
                   (run 'cljs)
                   (shell "flyctl deploy"))

@@ -100,7 +100,7 @@
   (let [size (r/atom "9")
         coords? (r/atom false)
         hoshi-placement (r/atom false)
-        line-thickness (r/atom "2")
+        line-thickness (r/atom "1")
         font-size (r/atom 12)]
     (fn []
       [v-box
@@ -125,7 +125,7 @@
                                          :on-change #(reset! coords? %)
                                          #_#_:change-on-blur? false}]]]
 
-                  #_[h-box
+                  [h-box
                    :children [[:label "Show hoshi"]
                               [single-dropdown {:choices hoshi-choices
                                                 :model hoshi-placement
@@ -146,17 +146,13 @@
                         svg-width (+
                                     (* (dec lines) space-x)
                                     (* 2 offset-x)
-                                    (if @coords? font-size 0)) ; ($lines-1) * $spaceX+ 2*$offsetX + ($showCoords ? $fontSize : 0) ;
+                                    (if @coords? font-size 0))
                         svg-height (+
                                      (* (dec lines) space-y)
-                                     (* 2 offset-y))        ;($lines-1) * $spaceY+ 2*$offsetY ;
-
-                        ]
-
-
+                                     (* 2 offset-y))]
                     [:svg#grid {:width (mm svg-width)
-                           :height (mm svg-height)
-                           :xmlns "http://www.w3.org/2000/svg"}
+                                :height (mm svg-height)
+                                :xmlns "http://www.w3.org/2000/svg"}
                      [:rect {:x (mm offset-x)
                              :y (mm offset-y)
                              :width (mm width)
@@ -164,8 +160,8 @@
                              :style {:fill "#fff"
                                      :stroke "#000"
                                      :stroke-width (str @line-thickness "mm")}}]
-                     (draw-lines-x lines line-thickness space-x space-y offset-x offset-y)
-                     (draw-lines-y lines line-thickness space-x space-y offset-x offset-y)
+                     (draw-lines-x lines @line-thickness space-x space-y offset-x offset-y)
+                     (draw-lines-y lines @line-thickness space-x space-y offset-x offset-y)
                      ;;(draw-coords @coords? lines space-x space-y offset-x offset-y font-size)
                      (draw-hoshis space-x space-y offset-x offset-y hoshi-radius hoshi-diameter lines @hoshi-placement)
                      ]
@@ -180,10 +176,7 @@
                                             (.setAttribute "href" (.. js/window -URL (createObjectURL blob)))
                                             (.click)
                                             (.remove))))}
-                   "Download board as SVG"
-                   ]
-
-                  ]]
+                   "Download board as SVG"]]]
       #_[:form#inputForm
          [:fieldset
           [:legend "Standard options"]
@@ -235,9 +228,4 @@
 
 
 
-    ;; http://localhost:31250/www/go/goban-grid?s=19&lT=2&hD=4&sC=true&dH=21.944&dV=23.166&sH=all
-    ;; http://localhost:31250/www/go/goban-grid?s=13&lT=2&hD=5&sC=false&dH=21.944&dV=23.166&sH=corners
-    ;; http://localhost:31250/www/go/goban-grid?s=13&lT=2&hD=5&sC=true&dH=21.944&dV=23.166&sH=corners
-    ;; http://clojure.gungfu.de/www/go/goban-grid?s=13&lT=2&hD=5&sC=true&dH=21.944&dV=23.166&sH=corners
-
-  )
+    )

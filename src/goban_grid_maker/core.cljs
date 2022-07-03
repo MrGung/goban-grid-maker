@@ -39,55 +39,44 @@
               :stroke "black"
               :stroke-width (mm line-thickness)}])))
 
-(def font-size 8)
-(def text-style {:fill "#000"
-                 :font-size (mm font-size)
-                 :font-family "Arial"
-                 :text-align "right"})
+(def default-font-size 8)
+(defn create-text-style [font-size]
+  {:fill "#000"
+   :font-size (mm font-size)
+   :font-family "Arial"
+   :text-align "right"})
 (def coords ["A" "B" "C" "D" "E" "F" "G" "H" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T"])
-(defn draw-coords [lines space-x space-y offset-x offset-y font-size]
-  (let [coords        (concat
-          (for [i (range lines)
-                :let [x (-
-                          (+
-                            (* i space-x)
-                            offset-x)
-                          (double (/ font-size (double 3))))
-                      y (+
-                          (* (dec lines) space-y)
-                          offset-y
-                          font-size)]]
-            (do
-              (js/console.log (+
-                                (* i space-x)
-                                offset-x))
-              (js/console.log (double (/ font-size (double 3))))
-              (js/console.log (double (/ font-size 3)))
-              (js/console.log  (divide font-size 3))
-              (js/console.log (clj->js {:x x}))
-              (js/console.log (clj->js y))
-              (js/console.log "---")
-              [:text {:x (mm x)
-                      :y (mm y)
-                      :style text-style}
-               (coords i)]))
+(defn draw-coords [lines space-x space-y offset-x offset-y font-size text-style]
+  (let [coords (concat
+                 (let [y (+
+                           (* (dec lines) space-y)
+                           offset-y
+                           font-size)]
+                   (for [i (range lines)
+                         :let [x (-
+                                   (+
+                                     (* i space-x)
+                                     offset-x)
+                                   (double (/ font-size 3)))]]
+                     [:text {:x (mm x)
+                             :y (mm y)
+                             :style text-style}
+                      (coords i)]))
 
-          (for [i (range lines)
-                :let [x (+
-                          (* (dec lines) space-x)
-                          offset-x
-                          (float (* font-size (float (/ 4 3)))))
-                      y (+
-                          (* i space-y)
-                          offset-y
-                          (float (/ font-size (double 3))))]]
-            [:text {:x (mm y)
-                    :y (mm y)
-                    :style {:text-style "text-anchor:end"}}
-             (- lines i)]))]
-    (js/console.log coords)
-    coords
-    ))
+                 (let [x (/ font-size 4) #_(+
+                                             (* (dec lines) space-x)
+                                             offset-x
+                                             (double (* font-size (double (/ 4 3)))))]
+                   (for [i (range lines)
+                         :let [y (+
+                                   (* i space-y)
+                                   offset-y
+                                   (double (/ font-size 3)))]]
+                     [:text {:x (mm x)
+                             :y (mm y)
+                             :style (merge text-style {:text-style "text-anchor:end"})}
+                      (- lines i)])))]
+    coords))
 
 
 (def hoshis {9 [2 4 6]
@@ -120,7 +109,7 @@
         coords? (r/atom false)
         hoshi-placement (r/atom false)
         line-thickness (r/atom "1")
-        font-size (r/atom 12)]
+        font-size (r/atom default-font-size)]
     (fn []
       [v-box
        :gap "10px"
@@ -182,7 +171,7 @@
                      (draw-lines-x lines @line-thickness space-x space-y offset-x offset-y)
                      (draw-lines-y lines @line-thickness space-x space-y offset-x offset-y)
                      (if @coords?
-                       (draw-coords lines space-x space-y offset-x offset-y font-size))
+                       (draw-coords lines space-x space-y offset-x offset-y @font-size (create-text-style @font-size)))
                      (draw-hoshis space-x space-y offset-x offset-y hoshi-radius hoshi-diameter lines @hoshi-placement)
                      ]
                     )

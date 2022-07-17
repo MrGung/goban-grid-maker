@@ -1,7 +1,3 @@
-FROM babashka/babashka:0.8.157
+FROM pierrezemb/gostatic
 
-COPY /src /src/
-COPY /public /public/
-COPY bb.edn bb.edn
-
-ENTRYPOINT bb serve
+COPY /public /srv/http/
